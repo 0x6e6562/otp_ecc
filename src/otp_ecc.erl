@@ -25,6 +25,10 @@ ecc_verification_test() ->
     } = RealSPKI,
      
     ECPoint = #'ECPoint'{point = Octets},
+
+    %% The parser generates a tag called 'OTPEcpkParameters', but that might be a bug
+    %% Use 'EcpkParameters' instead
+    
     EcpkParametersPem = {'EcpkParameters', Params, not_encrypted},
     ECParams = public_key:pem_entry_decode(EcpkParametersPem),
     ECPublicKey = {ECPoint, ECParams},
